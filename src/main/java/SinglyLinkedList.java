@@ -1,6 +1,6 @@
 public class SinglyLinkedList <T> {
 
-    private Node node = null;
+    private Node head = null;
     private int length = 0;
 
     public SinglyLinkedList() {
@@ -11,14 +11,36 @@ public class SinglyLinkedList <T> {
     }
 
     public void add(T data){
-        if (this.node == null){
-            this.node = new Node(data);
+        if (this.head == null){
+            this.head = new Node(data);
             length++;
         }else{
-            this.node.next = new Node(data);
+            this.head.next = new Node(data);
             length++;
         }
 
+    }
+
+    public void remove(T data){
+        Node prev = head;
+        Node now = head.next;
+        Node newNode = null;
+
+        while (prev != null && now != null)
+        {
+            if(prev.data.equals(data)){
+                this.length--;
+                prev = now;
+                now = prev.next;
+            }
+            else{
+                newNode.addtoNode(prev.data);
+                prev = head.next;
+                now = prev.next;
+            }
+        }
+
+        this.head = newNode;
     }
 
     private class Node {
@@ -27,6 +49,15 @@ public class SinglyLinkedList <T> {
         Node(T data) {
             this.data = data;
             this.next = null;
+        }
+
+        public void addtoNode(T data){
+            if(this == null){
+                this.data = data;
+            }else{
+                this.next.data = data;
+            }
+
         }
     }
 }
