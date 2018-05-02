@@ -11,20 +11,38 @@ public class SinglyLinkedList <T> {
     }
 
     public void add(T data){
+
         if (this.head == null){
             this.head = new Node(data);
             length++;
-        }else{
+        }else if(this.head.next == null){
             this.head.next = new Node(data);
             length++;
+        }else{
+            Node temp = head;
+            while(temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = new Node(data);
+            length++;
         }
+    }
 
+    @Override
+    public String toString() {
+        Node temp = head;
+        String result = "";
+        while(temp != null)
+        {
+            result += temp.data + " ";
+            temp = temp.next;
+        }
+        return result;
     }
 
     public void remove(T data){
         Node prev = head;
         Node now = head.next;
-        Node newNode = null;
 
         while (prev != null && now != null)
         {
@@ -34,13 +52,16 @@ public class SinglyLinkedList <T> {
                 now = prev.next;
             }
             else{
-                newNode.addtoNode(prev.data);
+                //newNode.addtoNode(prev.data);
                 prev = head.next;
                 now = prev.next;
             }
         }
 
-        this.head = newNode;
+    }
+
+    public void insert(T data){
+        
     }
 
     private class Node {
@@ -57,6 +78,12 @@ public class SinglyLinkedList <T> {
             }else{
                 this.next.data = data;
             }
+
+        }
+
+        @Override
+        public String toString() {
+            return  data + " ";
 
         }
     }
