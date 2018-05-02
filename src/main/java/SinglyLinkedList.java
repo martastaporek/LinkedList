@@ -41,27 +41,45 @@ public class SinglyLinkedList <T> {
     }
 
     public void remove(T data){
-        Node prev = head;
-        Node now = head.next;
-
-        while (prev != null && now != null)
-        {
-            if(prev.data.equals(data)){
-                this.length--;
-                prev = now;
-                now = prev.next;
+        Node temp = head;
+        if(this.head.data.equals(data)){
+            this.head = temp.next;
+            length--;
+        }
+        while(temp.next != null) {
+            if(temp.next.data.equals(data)){
+                temp.next = temp.next.next;
+                length--;
+                break;
             }
-            else{
-                //newNode.addtoNode(prev.data);
-                prev = head.next;
-                now = prev.next;
-            }
+            temp = temp.next;
         }
 
     }
 
-    public void insert(T data){
-        
+    public void insert(T data, int index){
+        if(index == 0){
+            Node holder = this.head;
+            this.head = new Node(data);
+            this.head.next = holder;
+        }
+        if(index > length){
+            this.add(data);
+        }
+        if(index < 0){
+            throw new NullPointerException();
+        }
+        Node temp = head;
+        for(int i = 0; i < length; i++){
+            if(i == index - 1){
+                Node holder = temp.next;
+                temp.next = new Node(data);
+                temp.next.next = holder;
+                length++;
+                break;
+            }
+            temp = temp.next;
+        }
     }
 
     private class Node {
@@ -70,15 +88,6 @@ public class SinglyLinkedList <T> {
         Node(T data) {
             this.data = data;
             this.next = null;
-        }
-
-        public void addtoNode(T data){
-            if(this == null){
-                this.data = data;
-            }else{
-                this.next.data = data;
-            }
-
         }
 
         @Override
