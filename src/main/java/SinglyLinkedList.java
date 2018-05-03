@@ -90,10 +90,5 @@ public class SinglyLinkedList <T> {
             this.next = null;
         }
 
-        @Override
-        public String toString() {
-            return  data + " ";
-
-        }
     }
 }

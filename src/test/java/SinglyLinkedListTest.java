@@ -42,24 +42,26 @@ class SinglyLinkedListTest {
         int [] numbers = {4, 5, 6, 7};
         addIntegers(numbers);
         this.intergerList.remove(7);
-
         assertEquals(intergerList.toString(), "4 5 6 ");
+    }
 
+    @Test
+    void checkExceptionThrow(){
+
+        assertThrows(NullPointerException.class,
+                ()->{ this.intergerList.insert(4, -20); });
     }
 
     void addIntegers(int [] numbers){
         for(int i = 0; i <  numbers.length; i++){
             intergerList.add(numbers[i]);
         }
-
     }
 
     void addStrings(String [] words){
         for(int i = 0; i <  words.length; i++){
             stringList.add(words[i]);
         }
-
     }
-
 
 }
