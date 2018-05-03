@@ -53,7 +53,7 @@ public class DoublyLinkedList <T>  {
             if(temp.next.data.equals(data)){
                 Node holder = temp.before;
                 temp.next = temp.next.next;
-                temp.next.before = holder;
+                temp.before = holder;
                 length--;
                 break;
             }
@@ -67,8 +67,9 @@ public class DoublyLinkedList <T>  {
             Node holder = this.head;
             this.head = new Node(data);
             this.head.next = holder;
+            this.head.before = null;
         }
-        if(index > length){
+        if(index >= length){
             this.add(data);
         }
         if(index < 0){
@@ -78,8 +79,10 @@ public class DoublyLinkedList <T>  {
         for(int i = 0; i < length; i++){
             if(i == index - 1){
                 Node holder = temp.next;
+                Node holderBefore = temp.before;
                 temp.next = new Node(data);
                 temp.next.next = holder;
+                temp.before = holderBefore;
                 length++;
                 break;
             }
